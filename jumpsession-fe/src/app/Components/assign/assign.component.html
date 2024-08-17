@@ -5,8 +5,10 @@
       <button class="my-4 col-2 btn btn-info" (click)="goBack()">Back</button>
       <button *ngIf="selectedBooks.length > 0" class="m-4 col-2 btn btn-success" (click)="assignBooks()">Assign</button>
     </div>
+
     <div *ngIf="selectedBooks.length > 0;else NoBooksSelected" class="row">
       <h3 class="col-4">Selected Books</h3>
+
       
       <div class="my-3 text-center" id="selectedBooks">
         <div class="row my-1" *ngFor="let book of selectedBooks; let i = index">
