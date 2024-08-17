@@ -8,7 +8,7 @@ import { Book } from '../Models/book';
 @Injectable({
   providedIn: 'root'
 })
-export class BooksService {
+export class BookService {
   private apiUrl = 'http://localhost:8080/api/book';
 
   constructor(private httpClient: HttpClient) { }
@@ -27,4 +27,20 @@ export class BooksService {
         })
       );
   }
+
+  addBook(newBook: Book): Observable<Book> {
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      return this.httpClient.post<Book>(`${this.apiUrl}/create-book`, newBook, { headers })
+        .pipe(
+          map(response => {
+            return response;
+          }),
+          catchError(error => {
+            console.error('Error adding book:', error);
+            return throwError('Error adding book, please try again later.');
+          })
+        );
+    }
+
 }
